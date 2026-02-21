@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fichas Triádicas – Análisis Semiótico Visual</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root{
+      --dk:#0d1117;--ac:#1a3a5c;--red:#c0392b;
+      --rep:#1e40af;--obj:#065f46;--intd:#5b21b6;--inta:#78350f;
+    }
+    *{box-sizing:border-box}
+    body{
+      background:linear-gradient(160deg,#0d1117 0%,#1a3a5c 55%,#0d1117 100%);
+      min-height:100vh;font-family:'Segoe UI',sans-serif;
+      padding:2rem 1rem;color:#1e293b;
+    }
+    .wrap{
+      max-width:1000px;margin:0 auto;background:#fff;
+      border-radius:20px;overflow:hidden;
+      box-shadow:0 30px 80px rgba(0,0,0,.6);
+    }
+    .ph{
+      background:linear-gradient(135deg,#0d1117,#1a3a5c);
+      color:#fff;padding:2.5rem 2rem;text-align:center;
+    }
+    .ph-tag{
+      background:var(--red);display:inline-block;
+      padding:3px 16px;border-radius:20px;font-size:.72rem;
+      text-transform:uppercase;letter-spacing:2px;margin-bottom:.9rem;
+    }
+    .ph h1{font-size:1.65rem;font-weight:700;margin-bottom:.3rem}
+    .ph p{opacity:.75;font-size:.87rem;margin:0}
+    .pb{padding:2rem 2.5rem}
+    .sec-lbl{
+      font-weight:700;color:#0d1117;font-size:1rem;
+      border-left:4px solid var(--red);padding-left:.85rem;
+      margin:2.2rem 0 1.3rem;
+    }
+    .info-box{
+      background:#eff6ff;border-radius:10px;padding:1.1rem 1.3rem;
+      font-size:.84rem;color:#1e40af;margin-bottom:1.5rem;
+    }
+    .student-box{
+      background:#f8f9fa;border-radius:12px;
+      padding:1.4rem;margin-bottom:1.8rem;
+    }
+    .tabs{display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
+    .tab{
+      flex:1;min-width:160px;padding:.65rem 1rem;
+      border:2px solid #e2e8f0;border-radius:10px;
+      background:#f8f9fa;cursor:pointer;text-align:center;
+      font-size:.83rem;font-weight:600;color:#64748b;transition:all .2s;
+    }
+    .tab.on{background:var(--ac);border-color:var(--ac);color:#fff}
+    .tab:hover:not(.on){border-color:var(--ac);color:var(--ac)}
+    .panel{display:none}.panel.on{display:block}
+    .prog{
+      background:#f8f9fa;border-radius:10px;
+      padding:.85rem 1.2rem;display:flex;
+      align-items:center;gap:12px;margin-bottom:1.5rem;
+    }
+    .prog-lbl{font-size:.8rem;font-weight:600;color:#475569;white-space:nowrap}
+    .prog-wrap{flex:1;background:#e2e8f0;border-radius:10px;height:10px;overflow:hidden}
+    .prog-fill{
+      height:100%;
+      background:linear-gradient(90deg,var(--ac),var(--red));
+      border-radius:10px;transition:width .4s ease;
+    }
+    .prog-pct{font-size:.78rem;font-weight:700;color:var(--ac);min-width:38px;text-align:right}
+    .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    @media(max-width:640px){.fgrid{grid-template-columns:1fr}}
+    .fc{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;transition:box-shadow .25s}
+    .fc:hover{box-shadow:0 6px 24px rgba(0,0,0,.1)}
+    .fi{position:relative;background:#0d1117;height:220px;overflow:hidden}
+    .fi img{width:100%;height:100%;object-fit:cover;opacity:.88;transition:opacity .3s;display:block}
+    .fc:hover .fi img{opacity:1}
+    .fbadge{
+      position:absolute;top:10px;left:10px;
+      background:rgba(13,17,23,.85);color:#fff;
+      padding:3px 11px;border-radius:20px;
+      font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+    }
+    .fnum{
+      position:absolute;bottom:10px;right:10px;
+      background:var(--red);color:#fff;width:28px;height:28px;
+      border-radius:50%;display:flex;align-items:center;
+      justify-content:center;font-size:.78rem;font-weight:700;
+    }
+    .fzoom{
+      position:absolute;inset:0;cursor:zoom-in;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .fzoom:hover::after{
+      content:"\f00e";font-family:"Font Awesome 6 Free";font-weight:900;
+      color:rgba(255,255,255,.8);font-size:1.8rem;
+    }
+    .ff{padding:1.1rem;background:#fff}
+    .fhint{
+      font-size:.71rem;color:#94a3b8;font-style:italic;
+      margin-bottom:.85rem;line-height:1.45;
+      background:#f8fafc;border-radius:6px;padding:.5rem .7rem;
+    }
+    .fg{margin-bottom:.9rem}
+    .fl{
+      display:flex;align-items:center;gap:6px;
+      font-size:.75rem;font-weight:700;
+      text-transform:uppercase;letter-spacing:.4px;
+      margin-bottom:.35rem;padding:4px 10px;border-radius:6px;
+    }
+    .fl-r{background:#dbeafe;color:var(--rep)}
+    .fl-o{background:#dcfce7;color:var(--obj)}
+    .fl-d{background:#ede9fe;color:var(--intd)}
+    .fl-a{background:#fef9c3;color:var(--inta)}
+    .fst{
+      width:8px;height:8px;border-radius:50%;
+      background:#e2e8f0;margin-left:auto;flex-shrink:0;transition:background .3s;
+    }
+    .fst.ok{background:#22c55e}
+    .fq{font-size:.71rem;color:#64748b;margin-bottom:.35rem}
+    textarea.ta{
+      width:100%;min-height:64px;
+      border:1.5px solid #e2e8f0;border-radius:7px;
+      padding:.52rem .75rem;font-size:.81rem;
+      font-family:'Segoe UI',sans-serif;
+      resize:vertical;transition:border-color .2s;color:#1e293b;
+    }
+    textarea.ta:focus{outline:none;border-color:var(--ac)}
+    textarea.ta.ok{border-color:#86efac}
+    .mobj{
+      background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+      border:1px solid #bae6fd;border-radius:12px;
+      padding:1.3rem;margin-bottom:1.5rem;
+    }
+    .mobj label{font-weight:700;font-size:.88rem;color:#0369a1;margin-bottom:.5rem;display:block}
+    .mobj select,.mobj input[type=text]{
+      width:100%;padding:.6rem .9rem;
+      border:1.5px solid #bae6fd;border-radius:8px;
+      font-size:.87rem;color:#1e293b;background:#fff;
+    }
+    .mc{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:1.3rem}
+    .mch{padding:.9rem 1.2rem;font-weight:700;font-size:.87rem;display:flex;align-items:center;gap:8px}
+    .mch-r{background:#dbeafe;color:var(--rep)}
+    .mch-o{background:#dcfce7;color:var(--obj)}
+    .mch-i{background:#ede9fe;color:var(--intd)}
+    .mch small{margin-left:auto;font-weight:400;font-size:.74rem;opacity:.85}
+    .mcb{padding:1.1rem;background:#fff}
+    .mtip{font-size:.75rem;color:#64748b;margin-top:.45rem}
+    /* ── Nanobanana ── */
+    .gen-btn{
+      width:100%;padding:.9rem;border:none;cursor:pointer;
+      border-radius:12px;margin:1.3rem 0;
+      background:linear-gradient(135deg,#1a1a2e,#0f3460);
+      color:#fff;font-size:.88rem;font-weight:700;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      transition:all .2s;box-shadow:0 4px 14px rgba(13,17,23,.4);
+    }
+    .gen-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 22px rgba(13,17,23,.55)}
+    .gen-btn:disabled{opacity:.5;cursor:not-allowed}
+    .gen-btn .miss{font-size:.72rem;font-weight:400;opacity:.8}
+    .prsec{border:2px solid #0f3460;border-radius:14px;overflow:hidden;margin-bottom:1.3rem;display:none}
+    .prsec.show{display:block;animation:fadein .3s ease}
+    @keyframes fadein{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+    .prhead{
+      background:linear-gradient(135deg,#1a1a2e,#0f3460);
+      color:#fff;padding:.9rem 1.2rem;font-weight:700;
+      font-size:.87rem;display:flex;align-items:center;gap:8px;
+    }
+    .prhead small{margin-left:auto;font-weight:400;font-size:.72rem;opacity:.8}
+    .prbody{padding:1.2rem;background:#fff}
+    .prbox{
+      background:#0d1117;border-radius:10px;padding:1.2rem 1.1rem;
+      font-size:.79rem;line-height:1.75;color:#e2e8f0;
+      font-family:monospace;position:relative;
+      margin-bottom:1rem;border:1px solid #30363d;
+      white-space:pre-wrap;word-break:break-word;min-height:60px;
+    }
+    .prlabel{
+      position:absolute;top:8px;right:8px;
+      background:#30363d;color:#8b949e;
+      padding:2px 8px;border-radius:4px;font-size:.64rem;
+      font-family:'Segoe UI',sans-serif;letter-spacing:.5px;pointer-events:none;
+    }
+    .cpbtn{
+      background:#21262d;color:#e2e8f0;border:1px solid #30363d;
+      padding:.42rem 1rem;border-radius:7px;font-size:.78rem;
+      cursor:pointer;transition:background .2s;margin-right:.5rem;
+    }
+    .cpbtn:hover{background:#30363d}
+    .cpbtn.done{background:#238636;border-color:#2ea043;color:#fff}
+    .nbbtn{
+      background:linear-gradient(135deg,#f97316,#c2410c);
+      color:#fff;border:none;padding:.42rem 1.1rem;
+      border-radius:7px;font-size:.78rem;cursor:pointer;
+      font-weight:600;transition:all .2s;
+      text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+    }
+    .nbbtn:hover{transform:translateY(-1px);color:#fff}
+    .rgbtn{
+      background:#f1f5f9;color:var(--ac);border:1.5px solid var(--ac);
+      padding:.4rem .9rem;border-radius:7px;font-size:.78rem;
+      cursor:pointer;font-weight:600;transition:all .2s;
+    }
+    .rgbtn:hover{background:var(--ac);color:#fff}
+    .ra-title{
+      font-size:.77rem;font-weight:700;color:#475569;
+      text-transform:uppercase;letter-spacing:.5px;
+      margin:1.3rem 0 .7rem;border-top:1px solid #e2e8f0;padding-top:1rem;
+    }
+    .ra-row{
+      display:flex;align-items:flex-start;gap:9px;
+      padding:.65rem .9rem;border-radius:8px;
+      margin-bottom:.55rem;border:1px solid #e2e8f0;
+    }
+    .ra-row.g{background:#f0fdf4;border-color:#86efac}
+    .ra-row.y{background:#fefce8;border-color:#fde047}
+    .ra-row.r{background:#fff1f2;border-color:#fda4af}
+    .ra-ico{font-size:1rem;flex-shrink:0;margin-top:1px;line-height:1.4}
+    .ra-pct{font-weight:800;font-size:.8rem;min-width:36px;flex-shrink:0;line-height:1.4}
+    .ra-pct.g{color:#15803d}.ra-pct.y{color:#854d0e}.ra-pct.r{color:#be123c}
+    .ra-text{font-size:.78rem;line-height:1.5}
+    .ra-tip{font-size:.72rem;margin-top:4px;font-style:italic;opacity:.85}
+    .ra-tip::before{content:"→ "}
+    .edit-zone{margin-top:1.2rem}
+    .edit-zone>label{font-size:.77rem;font-weight:600;color:#475569;display:block;margin-bottom:.4rem}
+    /* ── Rúbrica estrellas ── */
+    .rubric{
+      background:#f8fafc;border:1px solid #e2e8f0;
+      border-radius:12px;padding:1.3rem;margin-top:1.5rem;
+    }
+    .ri{display:flex;align-items:flex-start;gap:10px;margin-bottom:.9rem;font-size:.83rem}
+    .ri:last-child{margin-bottom:0}
+    .rpct{min-width:38px;font-weight:700;color:var(--red);font-size:.8rem;flex-shrink:0}
+    .rstars{display:flex;gap:3px;margin-left:auto;flex-shrink:0}
+    .rstars span{cursor:pointer;font-size:1.15rem;color:#e2e8f0;transition:color .15s;line-height:1}
+    .rstars span.lit{color:#f59e0b}
+    /* ── Submit ── */
+    .sub-zone{
+      background:#f8f9fa;border-radius:14px;
+      padding:1.6rem;text-align:center;margin-top:2rem;
+    }
+    .mail-info{
+      background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+      border:1px solid #86efac;border-radius:10px;
+      padding:1rem 1.2rem;margin-bottom:1.2rem;
+      font-size:.82rem;text-align:left;
+    }
+    .mail-info .mi-row{
+      display:flex;align-items:center;gap:8px;margin-bottom:.45rem;
+    }
+    .mail-info .mi-row:last-child{margin-bottom:0}
+    .mi-badge{
+      font-size:.68rem;font-weight:700;padding:2px 9px;
+      border-radius:10px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;
+    }
+    .mi-to{background:#dbeafe;color:#1d4ed8}
+    .mi-cc{background:#dcfce7;color:#15803d}
+    .btn-send{
+      background:linear-gradient(135deg,var(--red),#96281b);
+      color:#fff;border:none;padding:.85rem 2.5rem;
+      border-radius:30px;font-size:.95rem;font-weight:700;
+      cursor:pointer;box-shadow:0 4px 16px rgba(192,57,43,.4);
+      transition:transform .2s,box-shadow .2s;
+    }
+    .btn-send:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(192,57,43,.5)}
+    .btn-send:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    /* ── Lightbox ── */
+    .lb{
+      display:none;position:fixed;inset:0;
+      background:rgba(0,0,0,.93);z-index:9999;
+      align-items:center;justify-content:center;flex-direction:column;gap:12px;
+    }
+    .lb.show{display:flex}
+    .lb img{max-width:90vw;max-height:82vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+    .lb-x{position:absolute;top:16px;right:22px;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+    .lb-cap{background:rgba(255,255,255,.12);color:#fff;padding:5px 20px;border-radius:20px;font-size:.8rem}
+    /* ── Modal ── */
+    .ov{
+      display:none;position:fixed;inset:0;
+      background:rgba(0,0,0,.65);z-index:5000;
+      align-items:center;justify-content:center;
+    }
+    .ov.show{display:flex}
+    .mbox{
+      background:#fff;border-radius:16px;padding:2.3rem;
+      max-width:500px;width:92%;text-align:center;
+      animation:popIn .3s ease;
+    }
+    @keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+    .sring{
+      width:88px;height:88px;border-radius:50%;
+      background:linear-gradient(135deg,var(--ac),var(--red));
+      color:#fff;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      margin:0 auto 1.3rem;font-size:1.4rem;font-weight:700;
+    }
+    .sring small{font-size:.64rem;font-weight:400}
+    .spre{
+      background:#f1f5f9;border-radius:8px;padding:.8rem;
+      font-size:.73rem;max-height:200px;overflow-y:auto;
+      text-align:left;white-space:pre-wrap;margin-bottom:1rem;
+    }
+    .btn-cm{
+      background:var(--ac);color:#fff;border:none;
+      padding:.55rem 2rem;border-radius:20px;
+      font-size:.88rem;cursor:pointer;font-weight:600;margin-top:.8rem;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ══ HEADER ══ -->
+  <div class="ph">
+    <div class="ph-tag">Semana 10 · Semiótica de la imagen · Actividad 2</div>
+    <h1><i class="fas fa-images me-2"></i>Fichas Triádicas de Análisis Visual</h1>
+    <p>Aplicación autónoma de la tríada peirceana al análisis y diseño de mensajes visuales</p>
+  </div>
+
+  <div class="pb">
+
+    <!-- Instrucciones -->
+    <div class="info-box">
+      <strong><i class="fas fa-info-circle me-1"></i>Instrucciones:</strong>
+      Esta actividad tiene dos partes. En la <strong>Fase 1</strong> analizas 6 piezas
+      visuales completando la ficha triádica, incluyendo una
+      <strong>interpretación alternativa</strong> para otro público, cultura o contexto histórico.
+      En la <strong>Fase 2</strong> diseñas conceptualmente un signo nuevo,
+      generas un <strong>prompt para Nanobanana</strong> y realizas tu autoevaluación.
+      Haz clic en cada imagen para ampliarla.
+    </div>
+
+    <!-- Datos del estudiante -->
+    <div class="sec-lbl"><i class="fas fa-user-graduate me-2"></i>Datos del Estudiante</div>
+    <div class="student-box">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="sName">
+            Nombre completo <span class="text-danger">*</span>
+          </label>
+          <input class="form-control form-control-lg" id="sName"
+                 type="text" placeholder="Tu nombre completo"
+                 oninput="updateEmailPreview()"/>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold" for="sEmail">
+            Tu correo electrónico <span class="text-danger">*</span>
+          </label>
+          <input class="form-control form-control-lg" id="sEmail"
+                 type="email" placeholder="tucorreo@utp.edu.pe"
+                 oninput="updateEmailPreview()"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progreso global -->
+    <div class="prog">
+      <span class="prog-lbl"><i class="fas fa-tasks me-1"></i>Progreso general</span>
+      <div class="prog-wrap"><div class="prog-fill" id="pf1" style="width:0%"></div></div>
+      <span class="prog-pct" id="pp1">0%</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab on" onclick="switchTab('p1',this)">
+        <i class="fas fa-search me-1"></i>Actividad 1 · Fichas de Análisis
+      </div>
+      <div class="tab" onclick="switchTab('p2',this)">
+        <i class="fas fa-pencil-ruler me-1"></i>Actividad 2 · Micro-diseño + Nanobanana
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         ACTIVIDAD 1 – FICHAS DE ANÁLISIS
+    ══════════════════════════════════ -->
+    <div class="panel on" id="p1">
+      <p style="font-size:.82rem;color:#64748b;margin-bottom:1.2rem;">
+        <i class="fas fa-hand-pointer me-1 text-primary"></i>
+        Completa las cuatro dimensiones para cada pieza. El campo
+        <strong style="color:var(--inta)">Interpretante alternativo</strong>
+        debe proponer una lectura diferente: otro público, otra cultura u otro contexto histórico.
+      </p>
+      <div class="fgrid" id="fgrid"></div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         ACTIVIDAD 2 – MICRO-DISEÑO
+    ══════════════════════════════════ -->
+    <div class="panel" id="p2">
+      <p style="font-size:.82rem;color:#64748b;margin-bottom:1.2rem;">
+        Diseña conceptualmente una pieza visual completando la ficha triádica.
+        Al terminar los tres campos, se activará el botón para
+        <strong>generar el prompt de Nanobanana</strong> con diagnóstico automático
+        según la rúbrica de evaluación.
+      </p>
+
+      <!-- Objetivo -->
+      <div class="mobj">
+        <label><i class="fas fa-bullseye me-2"></i>Objetivo comunicacional</label>
+        <select id="mdSel" onchange="onObjChange()">
+          <option value="biblioteca">Invitar a estudiantes de primer ciclo a usar la biblioteca universitaria</option>
+          <option value="quemaduras">Advertir sobre el riesgo de quemaduras en un laboratorio</option>
+          <option value="reciclaje">Promover el reciclaje en el campus universitario</option>
+          <option value="acoso">Campaña contra el acoso en espacios académicos</option>
+          <option value="otro">Objetivo propio (describe a continuación)</option>
+        </select>
+        <input type="text" id="mdCustom"
+               placeholder="Describe tu objetivo comunicacional propio…"
+               style="display:none;margin-top:.6rem;"
+               oninput="updateProg()"/>
+      </div>
+
+      <!-- Representamen -->
+      <div class="mc">
+        <div class="mch mch-r">
+          <i class="fas fa-eye"></i> Representamen · El Signo
+          <small>¿Qué elementos visuales y/o textuales usarás?</small>
+        </div>
+        <div class="mcb">
+          <textarea class="ta" id="mRep" rows="5"
+            placeholder="Describe los elementos visuales y textuales: imágenes, colores, tipografía, símbolos, composición, formato (afiche, post, señal)…"
+            oninput="updateProg()"></textarea>
+          <div class="mtip">
+            <i class="fas fa-lightbulb me-1 text-warning"></i>
+            Indica si es predominantemente icónico, indicial o simbólico según Peirce.
+          </div>
+        </div>
+      </div>
+
+      <!-- Objeto -->
+      <div class="mc">
+        <div class="mch mch-o">
+          <i class="fas fa-map-marker-alt"></i> Objeto · La Realidad Referida
+          <small>¿A qué realidad remite el signo?</small>
+        </div>
+        <div class="mcb">
+          <textarea class="ta" id="mObj" rows="5"
+            placeholder="Describe la acción, lugar, servicio, riesgo o concepto al que remite tu pieza. El objeto no es la imagen, sino la realidad que ella representa…"
+            oninput="updateProg()"></textarea>
+          <div class="mtip">
+            <i class="fas fa-lightbulb me-1 text-warning"></i>
+            ¿Existe ya una imagen convencional para esa realidad, o tu propuesta es novedosa?
+          </div>
+        </div>
+      </div>
+
+      <!-- Interpretante -->
+      <div class="mc">
+        <div class="mch mch-i">
+          <i class="fas fa-brain"></i> Interpretante · El Efecto Buscado
+          <small>¿Qué efecto se busca generar en el público?</small>
+        </div>
+        <div class="mcb">
+          <textarea class="ta" id="mInt" rows="5"
+            placeholder="Describe la interpretación, emoción o acción que deseas provocar: curiosidad, sensación de peligro, deseo de participar, urgencia, empatía…"
+            oninput="updateProg()"></textarea>
+          <div class="mtip">
+            <i class="fas fa-lightbulb me-1 text-warning"></i>
+            ¿Es plausible este interpretante para tu público? ¿Podría generar
+            una lectura no deseada en otro contexto cultural?
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ BOTÓN GENERAR PROMPT ══ -->
+      <button class="gen-btn" id="genBtn" onclick="generatePrompt()" disabled>
+        <i class="fas fa-magic"></i>
+        Generar Prompt para Nanobanana
+        <span class="miss" id="genMiss">(completa los 3 campos primero)</span>
+      </button>
+
+      <!-- ══ SECCIÓN PROMPT ══ -->
+      <div class="prsec" id="prsec">
+        <div class="prhead">
+          <i class="fas fa-robot"></i> Prompt generado para Nanobanana
+          <small>Basado en tu ficha triádica · Ajusta y copia</small>
+        </div>
+        <div class="prbody">
+
+          <p style="font-size:.77rem;color:#64748b;margin-bottom:.9rem;">
+            <i class="fas fa-info-circle me-1 text-primary"></i>
+            Este prompt fue construido a partir de tu <strong>Representamen</strong>,
+            <strong>Objeto</strong> e <strong>Interpretante</strong>. Cópialo y pégalo
+            en <a href="https://nanobanana.ai" target="_blank">Nanobanana</a> para generar tu imagen.
+          </p>
+
+          <div class="prbox" id="prbox">
+            <span class="prlabel">NANOBANANA PROMPT</span>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+            <button class="cpbtn" id="cpBtn" onclick="copyPrompt()">
+              <i class="fas fa-copy me-1"></i>Copiar prompt
+            </button>
+            <a class="nbbtn" href="https://nanobanana.ai" target="_blank" rel="noopener">
+              <i class="fas fa-external-link-alt"></i>Abrir Nanobanana
+            </a>
+            <button class="rgbtn" onclick="generatePrompt()">
+              <i class="fas fa-sync me-1"></i>Regenerar
+            </button>
+          </div>
+
+          <div class="ra-title">
+            <i class="fas fa-clipboard-check me-1"></i>
+            Diagnóstico automático según la rúbrica de evaluación
+          </div>
+          <div id="raRows"></div>
+
+          <div class="edit-zone">
+            <label>
+              <i class="fas fa-pen me-1"></i>
+              Ajusta el prompt antes de pegar en Nanobanana:
+            </label>
+            <textarea class="ta" id="prEdit" rows="4"
+              placeholder="Edita aquí el prompt para añadir estilo artístico, ajustar elementos o corregir el énfasis visual…"></textarea>
+            <div style="margin-top:.55rem;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+              <button class="cpbtn" onclick="copyEdited()">
+                <i class="fas fa-copy me-1"></i>Copiar versión editada
+              </button>
+              <span style="font-size:.72rem;color:#94a3b8;">
+                <i class="fas fa-lightbulb me-1 text-warning"></i>
+                Sugerencia: añade estilo como
+                <em>flat design, editorial illustration, risograph, photorealism</em>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Autoevaluación -->
+      <div class="rubric">
+        <div class="fw-bold mb-3" style="font-size:.88rem;">
+          <i class="fas fa-star me-2 text-warning"></i>
+          Autoevaluación de tu propuesta &nbsp;—&nbsp; 1 = básico · 5 = excelente
+        </div>
+        <div class="ri">
+          <span class="rpct">30%</span>
+          <span>¿El representamen describe con precisión los elementos visuales y su tipo de signo (ícono, índice o símbolo)?</span>
+          <div class="rstars" id="sr1">
+            <span onclick="setStar('sr1',1)">☆</span><span onclick="setStar('sr1',2)">☆</span>
+            <span onclick="setStar('sr1',3)">☆</span><span onclick="setStar('sr1',4)">☆</span>
+            <span onclick="setStar('sr1',5)">☆</span>
+          </div>
+        </div>
+        <div class="ri">
+          <span class="rpct">40%</span>
+          <span>¿Existe coherencia entre el objetivo comunicacional, el representamen propuesto y el interpretante buscado?</span>
+          <div class="rstars" id="sr2">
+            <span onclick="setStar('sr2',1)">☆</span><span onclick="setStar('sr2',2)">☆</span>
+            <span onclick="setStar('sr2',3)">☆</span><span onclick="setStar('sr2',4)">☆</span>
+            <span onclick="setStar('sr2',5)">☆</span>
+          </div>
+        </div>
+        <div class="ri">
+          <span class="rpct">20%</span>
+          <span>¿Las decisiones de diseño están claramente explicadas y justificadas semiótica y comunicacionalmente?</span>
+          <div class="rstars" id="sr3">
+            <span onclick="setStar('sr3',1)">☆</span><span onclick="setStar('sr3',2)">☆</span>
+            <span onclick="setStar('sr3',3)">☆</span><span onclick="setStar('sr3',4)">☆</span>
+            <span onclick="setStar('sr3',5)">☆</span>
+          </div>
+        </div>
+        <div class="ri">
+          <span class="rpct">10%</span>
+          <span>¿La presentación y organización general del trabajo es clara, completa y bien estructurada?</span>
+          <div class="rstars" id="sr4">
+            <span onclick="setStar('sr4',1)">☆</span><span onclick="setStar('sr4',2)">☆</span>
+            <span onclick="setStar('sr4',3)">☆</span><span onclick="setStar('sr4',4)">☆</span>
+            <span onclick="setStar('sr4',5)">☆</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SUBMIT ══ -->
+    <div class="sub-zone">
+
+      <!-- Vista previa de correos -->
+      <div class="mail-info">
+        <div style="font-weight:700;font-size:.84rem;color:#15803d;margin-bottom:.7rem;">
+          <i class="fas fa-envelope me-2"></i>Destino del envío
+        </div>
+        <div class="mi-row">
+          <span class="mi-badge mi-to">Para · Docente</span>
+          <span style="color:#1e293b;font-weight:600;">c12139@utp.edu.pe</span>
+        </div>
+        <div class="mi-row">
+          <span class="mi-badge mi-cc">CC · Tú</span>
+          <span id="emailPreview" style="color:#64748b;font-style:italic;">
+            (escribe tu correo arriba)
+          </span>
+        </div>
+        <div style="font-size:.73rem;color:#64748b;margin-top:.6rem;">
+          <i class="fas fa-info-circle me-1"></i>
+          Al hacer clic se abrirá tu cliente de correo con los datos precargados.
+          El resumen completo se copiará automáticamente al portapapeles.
+        </div>
+      </div>
+
+      <!-- Barra de progreso -->
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <span class="prog-lbl">Completitud</span>
+        <div class="prog-wrap" style="flex:1">
+          <div class="prog-fill" id="pf2" style="width:0%"></div>
+        </div>
+        <span class="prog-pct" id="pp2">0%</span>
+      </div>
+
+      <button class="btn-send" id="btnSend"
+              onclick="sendForm('c12139@utp.edu.pe')">
+        <i class="fas fa-paper-plane me-2"></i>Enviar Participación
+      </button>
+      <p class="text-muted mt-2" style="font-size:.78rem;">
+        Se abrirá tu cliente de correo con el mensaje listo para enviar.
+      </p>
+    </div>
+
+  </div><!-- /pb -->
+</div><!-- /wrap -->
+
+<!-- ══ LIGHTBOX ══ -->
+<div class="lb" id="lb" onclick="closeLb(event)">
+  <span class="lb-x" onclick="document.getElementById('lb').classList.remove('show')">&times;</span>
+  <img src="" id="lbImg" alt=""/>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<!-- ══ MODAL RESULTADO ══ -->
+<div class="ov" id="ov" onclick="bgClose(event)">
+  <div class="mbox">
+    <div class="sring">
+      <span id="sNum">—</span>
+      <small>completado</small>
+    </div>
+    <h4 class="fw-bold mb-1" id="mTitle">¡Participación lista!</h4>
+    <p class="text-muted mb-3" id="mMsg" style="font-size:.86rem;"></p>
+    <div id="mInfo" class="mb-2"></div>
+    <div id="mSum" style="display:none;">
+      <p style="font-size:.77rem;font-weight:600;text-align:left;margin-bottom:.4rem;">
+        <i class="fas fa-clipboard me-1 text-primary"></i>
+        Resumen completo (ya copiado al portapapeles — pega con Ctrl+V en el correo):
+      </p>
+      <pre class="spre" id="mPre"></pre>
+    </div>
+    <button class="btn-cm" onclick="closeModal()">
+      <i class="fas fa-check me-1"></i>Cerrar
+    </button>
+  </div>
+</div>
+
+<script>
+/* ══ DATOS IMÁGENES ══════════════════════════════════════ */
+const IMGS = [
+  {
+    f:"zapata_head.jpg", num:"01", title:"Retrato · Figura Histórica",
+    hint:"Fotografía histórica en blanco y negro. Hombre con bigote prominente y traje de época."
+  },
+  {
+    f:"Sicario.jpg", num:"02", title:"Artefacto · Objeto Táctico",
+    hint:"Fotografía en B/N de arma de fuego con accesorios tácticos, guantes y munición sobre superficie oscura."
+  },
+  {
+    f:"Samurai.jpg", num:"03", title:"Cuerpo · Performance Cultural",
+    hint:"Fotografía en B/N: hombre con torso descubierto, banda con kanji japonés en cabeza, sosteniendo una katana."
+  },
+  {
+    f:"Teresa_Calcut.jpg", num:"04", title:"Figura Simbólica · Religiosidad",
+    hint:"Fotografía en B/N: mujer mayor sonriente con hábito religioso blanco con bordes azules, portando libros."
+  },
+  {
+    f:"somalia.jpg", num:"05", title:"Fotografía Documental · Crisis",
+    hint:"Fotografía en B/N: niño gravemente desnutrido siendo sostenido por manos adultas."
+  },
+  {
+    f:"Nina.jpg", num:"06", title:"Infancia · Inocencia · Espectáculo",
+    hint:"Fotografía en B/N: niña joven sonriente con cabello rizado, apoyando la mejilla en su mano."
+  }
+];
+
+const FDS = [
+  { k:"r", lbl:"Representamen", q:"¿Qué vemos? Describe los signos visuales presentes (formas, colores, elementos, composición).", cls:"fl-r", ic:"fa-eye" },
+  { k:"o", lbl:"Objeto / Referente", q:"¿A qué realidad, persona, evento o concepto alude la imagen?", cls:"fl-o", ic:"fa-map-marker-alt" },
+  { k:"d", lbl:"Interpretante deseado", q:"¿Qué se busca que piense / sienta / haga el público según el emisor original?", cls:"fl-d", ic:"fa-bullseye" },
+  { k:"a", lbl:"Interpretante alternativo", q:"¿Qué otra lectura es posible para otro público, cultura o contexto histórico diferente?", cls:"fl-a", ic:"fa-random" }
+];
+
+const SV = { sr1:0, sr2:0, sr3:0, sr4:0 };
+
+/* ══ INIT ════════════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', () => { buildGrid(); });
+
+function buildGrid() {
+  const grid = document.getElementById('fgrid');
+  IMGS.forEach((img, i) => {
+    const n = i + 1;
+    const fieldsHTML = FDS.map(fd => `
+      <div class="fg">
+        <div class="fl ${fd.cls}">
+          <i class="fas ${fd.ic}" style="font-size:.72rem"></i>
+          ${fd.lbl}
+          <span class="fst" id="st${n}${fd.k}"></span>
+        </div>
+        <div class="fq">${fd.q}</div>
+        <textarea class="ta" id="f${n}${fd.k}" rows="3"
+          placeholder="Escribe tu análisis semiótico…"
+          oninput="onInput(${n},'${fd.k}')"></textarea>
+      </div>`).join('');
+    const card = document.createElement('div');
+    card.className = 'fc';
+    card.innerHTML = `
+      <div class="fi">
+        <img src="${img.f}" alt="${img.title}" loading="lazy"/>
+        <div class="fbadge">${img.title}</div>
+        <div class="fnum">${img.num}</div>
+        <div class="fzoom"
+             onclick="openLb('${img.f}','Pieza ${img.num} · ${img.title}')"
+             title="Clic para ampliar"></div>
+      </div>
+      <div class="ff">
+        <div class="fhint"><i class="fas fa-info-circle me-1"></i>${img.hint}</div>
+        ${fieldsHTML}
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+/* ══ INPUT ══════════════════════════════════════════════ */
+function onInput(n, k) {
+  const el = document.getElementById(`f${n}${k}`);
+  const st = document.getElementById(`st${n}${k}`);
+  const ok = el.value.trim().length > 20;
+  st.classList.toggle('ok', ok);
+  el.classList.toggle('ok', ok);
+  updateProg();
+}
+
+/* ══ PROGRESO ════════════════════════════════════════════ */
+function updateProg() {
+  let done = 0;
+  IMGS.forEach((_, i) => {
+    FDS.forEach(fd => {
+      const el = document.getElementById(`f${i+1}${fd.k}`);
+      if (el && el.value.trim().length > 20) done++;
+    });
+  });
+  ['mRep','mObj','mInt'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value.trim().length > 20) done++;
+  });
+  const pct = Math.round((done / 27) * 100);
+  ['pf1','pf2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.width = pct + '%';
+  });
+  ['pp1','pp2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = pct + '%';
+  });
+  checkGenBtn();
+}
+
+/* ══ VISTA PREVIA CORREO ════════════════════════════════ */
+function updateEmailPreview() {
+  const email = document.getElementById('sEmail').value.trim();
+  const prev  = document.getElementById('emailPreview');
+  prev.textContent = email || '(escribe tu correo arriba)';
+  prev.style.fontStyle  = email ? 'normal' : 'italic';
+  prev.style.color      = email ? '#1e293b' : '#64748b';
+  prev.style.fontWeight = email ? '600' : '400';
+}
+
+/* ══ TABS ════════════════════════════════════════════════ */
+function switchTab(id, tab) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  tab.classList.add('on');
+}
+
+/* ══ SELECTOR OBJETIVO ══════════════════════════════════ */
+function onObjChange() {
+  const v = document.getElementById('mdSel').value;
+  document.getElementById('mdCustom').style.display = v === 'otro' ? 'block' : 'none';
+  updateProg();
+}
+
+/* ══ LIGHTBOX ════════════════════════════════════════════ */
+function openLb(src, cap) {
+  document.getElementById('lbImg').src = src;
+  document.getElementById('lbCap').textContent = cap;
+  document.getElementById('lb').classList.add('show');
+}
+function closeLb(e) {
+  if (!e || e.target !== document.getElementById('lbImg'))
+    document.getElementById('lb').classList.remove('show');
+}
+
+/* ══ ESTRELLAS ══════════════════════════════════════════ */
+function setStar(id, val) {
+  SV[id] = val;
+  document.querySelectorAll(`#${id} span`).forEach((s, i) => {
+    s.textContent = i < val ? '★' : '☆';
+    s.classList.toggle('lit', i < val);
+  });
+}
+
+/* ══ NANOBANANA: CHECK BOTÓN ════════════════════════════ */
+function checkGenBtn() {
+  const rep  = document.getElementById('mRep').value.trim();
+  const obj  = document.getElementById('mObj').value.trim();
+  const int  = document.getElementById('mInt').value.trim();
+  const btn  = document.getElementById('genBtn');
+  const miss = document.getElementById('genMiss');
+  const ok   = rep.length > 20 && obj.length > 20 && int.length > 20;
+  btn.disabled = !ok;
+  if (ok) {
+    miss.textContent = '';
+  } else {
+    const m = [];
+    if (rep.length <= 20) m.push('Representamen');
+    if (obj.length <= 20) m.push('Objeto');
+    if (int.length <= 20) m.push('Interpretante');
+    miss.textContent = `(falta: ${m.join(', ')})`;
+  }
+}
+
+/* ══ NANOBANANA: GENERAR PROMPT ═════════════════════════ */
+function generatePrompt() {
+  const sel    = document.getElementById('mdSel');
+  const custom = document.getElementById('mdCustom').value.trim();
+  const goal   = sel.value === 'otro' && custom
+    ? custom : sel.options[sel.selectedIndex].text;
+
+  const rep = document.getElementById('mRep').value.trim();
+  const obj = document.getElementById('mObj').value.trim();
+  const int = document.getElementById('mInt').value.trim();
+
+  if (rep.length < 20 || obj.length < 20 || int.length < 20) {
+    alert('⚠️ Completa los tres campos de la ficha triádica antes de generar el prompt.');
+    return;
+  }
+
+  const signTypes = [];
+  if (/icón|icon|fotografí|ilustrac|figura|semejanza|retrato|imagen real|parecido/i.test(rep))
+    signTypes.push('iconic sign (visual resemblance)');
+  if (/índic|indic|humo|flecha|rastro|señal|advertenc|temperatura|quemad|causa|consecuencia/i.test(rep))
+    signTypes.push('indexical sign (cause-effect trace)');
+  if (/símbolo|simbólic|convención|tipograf|logotipo|color convencional|abstrac|arbitrario|codificado/i.test(rep))
+    signTypes.push('symbolic sign (cultural convention)');
+  if (signTypes.length === 0) signTypes.push('iconic sign');
+
+  let moodEN = 'clear and impactful visual communication';
+  if (/urgenc|alarma|peligro|riesgo|alerta|advertencia/i.test(int))
+    moodEN = 'urgent, alarming, high-contrast warning atmosphere';
+  else if (/empatía|solidaridad|humanidad|compasión|ternura/i.test(int))
+    moodEN = 'empathetic, warm, deeply human emotional tone';
+  else if (/curiosidad|invitac|bienvenida|descubrir|explorar/i.test(int))
+    moodEN = 'inviting, curious, welcoming and open';
+  else if (/protección|seguridad|confianza|tranquilidad/i.test(int))
+    moodEN = 'protective, safe, reassuring visual atmosphere';
+  else if (/poder|fuerza|motivac|energía|dinamismo/i.test(int))
+    moodEN = 'powerful, motivating, energetic and dynamic';
+  else if (/tristeza|dolor|sufrimiento|pérdida/i.test(int))
+    moodEN = 'somber, emotional, profound human weight';
+  else if (/alegría|celebración|festivo|positivo/i.test(int))
+    moodEN = 'joyful, celebratory, vibrant and positive';
+
+  let fmt = 'graphic design poster';
+  if (/redes|instagram|post|social/i.test(goal)) fmt = 'social media graphic';
+  else if (/señal|señalética|laboratorio/i.test(goal)) fmt = 'safety signage design';
+  else if (/banner/i.test(goal)) fmt = 'horizontal banner design';
+  else if (/biblioteca|invit/i.test(goal)) fmt = 'institutional invitation poster';
+  else if (/reciclaj|ambiental/i.test(goal)) fmt = 'environmental awareness poster';
+  else if (/acoso|campaña social/i.test(goal)) fmt = 'social awareness campaign poster';
+
+  const clip = (s, n) => s.length > n ? s.substring(0, n) + '…' : s;
+  const prompt =
+`${fmt}, ${clip(rep,180)}, ` +
+`mood: ${moodEN}, ` +
+`subject: ${clip(obj,100)}, ` +
+`intended effect: ${clip(int,100)}, ` +
+`sign type: ${signTypes.join(' + ')}, ` +
+`bold composition, strong visual hierarchy, professional graphic design, ` +
+`clean layout, sharp contrast, high resolution, 4k quality`;
+
+  document.getElementById('prbox').innerHTML =
+    `<span class="prlabel">NANOBANANA PROMPT</span>\n${prompt}`;
+  document.getElementById('prEdit').value = prompt;
+  document.getElementById('raRows').innerHTML =
+    renderRubricAnalysis(analyzeRubric(rep, obj, int, signTypes, goal));
+  const sec = document.getElementById('prsec');
+  sec.classList.add('show');
+  setTimeout(() => sec.scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
+}
+
+/* ══ ANÁLISIS RÚBRICA ════════════════════════════════════ */
+function analyzeRubric(rep, obj, int, signTypes, goal) {
+  const hasVis = rep.length > 40 &&
+    /color|forma|imagen|tipograf|compos|ilustr|fotografí|símbolo|figura|contraste|línea|espacio|fondo|tamaño/i.test(rep);
+  const hasSType =
+    /icón|icon|índic|simbólic|símbolo|convención|semejanza|arbitrario|abstrac|signo/i.test(rep);
+  let r30;
+  if (hasVis && hasSType)
+    r30 = { lvl:'g', ico:'✅', msg:'Menciona elementos visuales concretos Y clasifica el tipo de signo peirceano.', tip:null };
+  else if (hasVis)
+    r30 = { lvl:'y', ico:'⚠️', msg:'Describe elementos visuales pero no identifica el tipo de signo (ícono, índice o símbolo).', tip:'Añade: "el diseño es predominantemente [icónico/indicial/simbólico] porque…"' };
+  else
+    r30 = { lvl:'r', ico:'❌', msg:'La descripción es muy general; faltan elementos visuales concretos y clasificación del signo.', tip:'Especifica colores, formas, composición y declara el tipo de signo según Peirce.' };
+
+  const ws = s => new Set((s.toLowerCase().match(/\w{4,}/g) || []));
+  const wR = ws(rep), wO = ws(obj), wI = ws(int), wG = ws(goal);
+  const ov = (a, b) => [...a].filter(w => b.has(w)).length;
+  const score = ov(wR,wI) + ov(wO,wI) + ov(wG,wR) + ov(wG,wI);
+  let r40;
+  if (score >= 6)
+    r40 = { lvl:'g', ico:'✅', msg:'Alta coherencia: representamen, objeto e interpretante están alineados con el objetivo.', tip:null };
+  else if (score >= 3)
+    r40 = { lvl:'y', ico:'⚠️', msg:'Coherencia parcial. Algunos elementos se conectan pero la cadena triádica no es sólida.', tip:'¿La imagen que describes puede realmente generar el efecto buscado en ese público específico?' };
+  else
+    r40 = { lvl:'r', ico:'❌', msg:'Baja coherencia: los tres elementos de la tríada parecen poco vinculados entre sí.', tip:'La descripción visual debe derivar del objetivo y apuntar directamente al interpretante.' };
+
+  const hasSemio =
+    /representamen|interpretante|objeto|icón|índic|simbólic|convención|signo|semiosis|peirce/i.test(rep+obj+int);
+  const hasDesign =
+    /composic|contraste|tipograf|color|espacio|forma|visual|diseño|comunic|jerarquía/i.test(rep+obj+int);
+  let r20;
+  if (hasSemio && hasDesign)
+    r20 = { lvl:'g', ico:'✅', msg:'Usa vocabulario semiótico peirceano Y términos de diseño para justificar las decisiones.', tip:null };
+  else if (hasDesign)
+    r20 = { lvl:'y', ico:'⚠️', msg:'Usa términos de diseño pero falta justificación semiótica explícita.', tip:'Incorpora conceptos de Peirce: ¿por qué este signo es icónico/indicial/simbólico? ¿Qué convención activa?' };
+  else
+    r20 = { lvl:'r', ico:'❌', msg:'Las decisiones de diseño no están justificadas semiótica ni comunicacionalmente.', tip:'Explica cada elemento visual y el tipo de relación signo–objeto–interpretante que establece.' };
+
+  const total  = rep.length + obj.length + int.length;
+  const filled = rep.length > 30 && obj.length > 30 && int.length > 30;
+  let r10;
+  if (filled && total > 400)
+    r10 = { lvl:'g', ico:'✅', msg:'Los tres campos están completos y desarrollados con suficiente detalle.', tip:null };
+  else if (filled)
+    r10 = { lvl:'y', ico:'⚠️', msg:'Todos los campos completados pero con desarrollo limitado.', tip:'Amplía cada sección. Apunta a 4–5 oraciones por campo.' };
+  else
+    r10 = { lvl:'r', ico:'❌', msg:'Uno o más campos están incompletos o demasiado breves para ser evaluados.', tip:'Completa todos los campos con al menos 3–4 oraciones de contenido sustantivo.' };
+
+  return { r30, r40, r20, r10 };
+}
+
+function renderRubricAnalysis(an) {
+  const rows = [
+    { pct:'30%', q:'¿El representamen describe elementos visuales concretos y el tipo de signo (ícono/índice/símbolo)?', ...an.r30 },
+    { pct:'40%', q:'¿Coherencia entre objetivo comunicacional, representamen propuesto e interpretante buscado?',        ...an.r40 },
+    { pct:'20%', q:'¿Las decisiones de diseño están justificadas semiótica y comunicacionalmente?',                      ...an.r20 },
+    { pct:'10%', q:'¿La presentación es clara, completa y bien organizada?',                                             ...an.r10 }
+  ];
+  return rows.map(r => `
+    <div class="ra-row ${r.lvl}">
+      <span class="ra-ico">${r.ico}</span>
+      <span class="ra-pct ${r.lvl}">${r.pct}</span>
+      <div class="ra-text">
+        <div><strong>${r.q}</strong></div>
+        <div style="font-style:italic;margin-top:3px;">${r.msg}</div>
+        ${r.tip ? `<div class="ra-tip">${r.tip}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+/* ══ COPIAR PROMPT ══════════════════════════════════════ */
+function copyPrompt() {
+  const raw = document.getElementById('prbox').innerText
+    .replace('NANOBANANA PROMPT','').trim();
+  navigator.clipboard.writeText(raw).then(() => {
+    const b = document.getElementById('cpBtn');
+    b.classList.add('done');
+    b.innerHTML = '<i class="fas fa-check me-1"></i>¡Copiado!';
+    setTimeout(() => {
+      b.classList.remove('done');
+      b.innerHTML = '<i class="fas fa-copy me-1"></i>Copiar prompt';
+    }, 2400);
+  });
+}
+function copyEdited() {
+  const t = document.getElementById('prEdit').value;
+  if (!t.trim()) { alert('No hay texto en el editor.'); return; }
+  navigator.clipboard.writeText(t).then(() =>
+    alert('✅ Versión editada copiada al portapapeles.')
+  );
+}
+
+/* ══ COMPLETITUD ════════════════════════════════════════ */
+function getCompletion() {
+  let d = 0;
+  IMGS.forEach((_, i) => {
+    FDS.forEach(fd => {
+      const el = document.getElementById(`f${i+1}${fd.k}`);
+      if (el && el.value.trim().length > 20) d++;
+    });
+  });
+  ['mRep','mObj','mInt'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value.trim().length > 20) d++;
+  });
+  return `${d}/27`;
+}
+
+/* ══ RESUMEN ════════════════════════════════════════════ */
+function buildSummary(name, email) {
+  let t = `FICHAS TRIÁDICAS – ANÁLISIS SEMIÓTICO VISUAL\n`;
+  t += `Fecha: ${new Date().toLocaleString('es-PE')}\n`;
+  t += `Estudiante: ${name}  |  Correo: ${email}\n`;
+  t += `${'─'.repeat(54)}\n\n`;
+  t += `ACTIVIDAD 1 – FICHAS DE ANÁLISIS\n\n`;
+  IMGS.forEach((img, i) => {
+    const n = i + 1;
+    t += `Pieza ${img.num}: ${img.title}\n`;
+    FDS.forEach(fd => {
+      const el = document.getElementById(`f${n}${fd.k}`);
+      t += `  [${fd.lbl}]\n  ${(el ? el.value.trim() : '') || '(sin respuesta)'}\n`;
+    });
+    t += '\n';
+  });
+  t += `${'─'.repeat(54)}\nACTIVIDAD 2 – MICRO-DISEÑO TRIÁDICO\n\n`;
+  const sel = document.getElementById('mdSel');
+  t += `Objetivo: ${sel.options[sel.selectedIndex].text}\n`;
+  const cust = document.getElementById('mdCustom').value.trim();
+  if (cust) t += `Objetivo propio: ${cust}\n`;
+  t += `\n[Representamen]\n${document.getElementById('mRep').value.trim() || '(sin respuesta)'}\n`;
+  t += `\n[Objeto]\n${document.getElementById('mObj').value.trim()        || '(sin respuesta)'}\n`;
+  t += `\n[Interpretante]\n${document.getElementById('mInt').value.trim() || '(sin respuesta)'}\n`;
+  const prEdit = document.getElementById('prEdit').value.trim();
+  if (prEdit) t += `\n[Prompt Nanobanana]\n${prEdit}\n`;
+  t += `\nAUTOEVALUACIÓN:\n`;
+  t += `  Representamen (30%): ${SV.sr1}/5\n`;
+  t += `  Coherencia triádica (40%): ${SV.sr2}/5\n`;
+  t += `  Claridad decisiones (20%): ${SV.sr3}/5\n`;
+  t += `  Presentación (10%): ${SV.sr4}/5\n`;
+  t += `${'─'.repeat(54)}\n`;
+  return t;
+}
+
+/* ══ ENVÍO CON MAILTO ════════════════════════════════════ */
+function sendForm(teacherEmail) {
+  const name  = document.getElementById('sName').value.trim();
+  const email = document.getElementById('sEmail').value.trim();
+
+  if (!name || !email) {
+    alert('⚠️ Completa tu nombre y correo electrónico antes de enviar.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('⚠️ El formato del correo no es válido.');
+    return;
+  }
+
+  const btn = document.getElementById('btnSend');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Preparando…';
+
+  const summary    = buildSummary(name, email);
+  const completion = getCompletion();
+
+  /* Copiar resumen completo al portapapeles */
+  navigator.clipboard.writeText(summary).catch(() => {});
+
+  /* Construir mailto */
+  const subject = encodeURIComponent(
+    `[Semiótica] Fichas Triádicas · ${name}`
+  );
+  const bodyShort = encodeURIComponent(
+    `Estimado/a docente:\n\n` +
+    `Le envío mi participación en la actividad "Fichas Triádicas de Análisis Visual".\n\n` +
+    `Estudiante: ${name}\n` +
+    `Correo: ${email}\n` +
+    `Completitud: ${completion}\n\n` +
+    `${'─'.repeat(48)}\n` +
+    `NOTA: El resumen completo se ha copiado al portapapeles.\n` +
+    `Péguelo con Ctrl+V a continuación de este mensaje.\n` +
+    `${'─'.repeat(48)}\n\n` +
+    summary.substring(0, 1500)
+  );
+
+  const mailtoLink =
+    `mailto:${teacherEmail}` +
+    `?cc=${encodeURIComponent(email)}` +
+    `&subject=${subject}` +
+    `&body=${bodyShort}`;
+
+  window.location.href = mailtoLink;
+
+  /* Modal de confirmación */
+  document.getElementById('sNum').textContent   = completion;
+  document.getElementById('mTitle').textContent = `¡Listo, ${name}!`;
+  document.getElementById('mMsg').textContent   =
+    'Tu cliente de correo se abrirá con el mensaje listo. El resumen completo ya está en tu portapapeles: pégalo en el cuerpo del correo con Ctrl+V.';
+
+  document.getElementById('mInfo').innerHTML = `
+    <div class="alert alert-primary py-2 mb-1" style="font-size:.8rem;text-align:left;">
+      <i class="fas fa-chalkboard-teacher me-1"></i>
+      <strong>Para (docente):</strong> ${teacherEmail}
+    </div>
+    <div class="alert alert-success py-2 mb-1" style="font-size:.8rem;text-align:left;">
+      <i class="fas fa-user-graduate me-1"></i>
+      <strong>CC (copia para ti):</strong> ${email}
+    </div>
+    <div class="alert alert-warning py-2" style="font-size:.8rem;text-align:left;">
+      <i class="fas fa-clipboard-check me-1"></i>
+      <strong>Resumen copiado al portapapeles.</strong>
+      Pégalo en el correo con <kbd>Ctrl+V</kbd> o <kbd>Cmd+V</kbd>.
+    </div>`;
+
+  document.getElementById('mSum').style.display = 'block';
+  document.getElementById('mPre').textContent   = summary;
+  document.getElementById('ov').classList.add('show');
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Enviar Participación';
+}
+
+/* ══ MODAL ══════════════════════════════════════════════ */
+function closeModal() {
+  document.getElementById('ov').classList.remove('show');
+  document.getElementById('mSum').style.display = 'none';
+}
+function bgClose(e) {
+  if (e.target === document.getElementById('ov')) closeModal();
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
