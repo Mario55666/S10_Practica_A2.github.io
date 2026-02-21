@@ -47,4 +47,5 @@ El proyecto está consolidado en un **archivo único autoejecutable**, lo que pe
 5.  **Envío:** Presiona "Enviar Participación" para copiar los resultados al portapapeles y preparar el correo para el docente.
 
 ---
-**Nota:** Este proyecto ha sido desarrollado como material de apoyo académico para la Universidad Tecnológica del Perú (UTP).
+
+**Nota:** Este proyecto ha sido desarrollado como material de apoyo académico para el curso de Semiotica Visual.
